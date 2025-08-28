@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Pickup & Drop - Ridex (Cab Booking System)</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <style>
+        /* Ensure full height layout */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: 60px;
+            /* Fixed height for header */
+        }
+
+        /* Add padding so content is not hidden under header */
+        .content {
+            flex: 1;
+            padding-top: 100px;
+            /* Adjusted based on header height */
+        }
+
+        /* Logo Styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Logo Image */
+        .logo-img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        /* Home Button - Aligns to Top Right */
+        .header .btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer Styling */
+        .footer {
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">
+            <img src="img/logo_favicon.png" alt="Ridex Logo" class="logo-img"> Ridex
+        </h1>
+        <button class="btn btn-secondary" id="home-button">Home</button>
+    </header>
+
+    <!-- VIP Pickup & Drop Section -->
+    <section class="vehicles py-5">
+        <div class="container">
+            <div class="text-center mb-5"><br>
+                <h2>VIP Pickup & Drop Services</h2>
+            </div>
+            <div class="row" id="vehicles-container">
+                <!-- VIP Executive Sedan -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/vipsedan.jpeg" class="card-img-top" alt="VIP Executive Sedan">
+                        <div class="card-body">
+                            <h5 class="card-title">VIP Executive Sedan</h5>
+                            <p class="card-text">A luxury sedan providing comfort and class for seamless airport and
+                                corporate transfers.</p>
+                            <p><strong>Price: ₹40/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Luxury Business SUV -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600" data-aos-delay="200">
+                    <div class="vehicle-card card">
+                        <img src="img/vipsedan.jpeg" class="card-img-top" alt="Luxury Business SUV">
+                        <div class="card-body">
+                            <h5 class="card-title">Luxury Business SUV</h5>
+                            <p class="card-text">A spacious and elegant SUV ideal for VIPs seeking premium comfort and
+                                security.</p>
+                            <p><strong>Price: ₹50/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presidential Limousine -->
+                <div class="col-md-4 mb-4" data-aos-delay="300" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/viplimousine.jpg" class="card-img-top" alt="Presidential Limousine">
+                        <div class="card-body">
+                            <h5 class="card-title">Presidential Limousine</h5>
+                            <p class="card-text">An ultra-luxurious limousine perfect for high-profile individuals and
+                                elite events.</p>
+                            <p><strong>Price: ₹60/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIP Corporate Shuttle -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/vipshuttle.png" class="card-img-top" alt="VIP Corporate Shuttle">
+                        <div class="card-body">
+                            <h5 class="card-title">VIP Corporate Shuttle</h5>
+                            <p class="card-text">A high-end shuttle van offering group transport for executives with
+                                top-tier amenities.</p>
+                            <p><strong>Price: ₹70/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container d-flex justify-content-center align-items-center">
+            <p class="mb-0">&copy; 2025 Ridex. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- JavaScript -->
+    <script>
+        document.getElementById("home-button").addEventListener("click", function () {
+            window.location.href = "index.html"; // Redirect to home page
+        });
+    </script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pzjw8f+ua7Kw1TIqVJw2UJRRU7A6t3ePFF4zBzF3MSTwn2Ml6G1F59PAK+0XlF8V"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

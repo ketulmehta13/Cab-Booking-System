@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Ridex</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* background-image: url(img/bg.jpg); */
+      background-color: #0C0C0E;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: hsl(#0C0C0E);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow:0 0 8px hsl(56, 64%, 61%);
+      text-align: center;
+      width: 50%;
+    }
+
+    .profile-section {
+      text-align: center;
+      color: #fff;
+    }
+
+    #profileImage {
+      font-family: Arial, Helvetica, sans-serif;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      background: #004D3C;
+      font-size: 3.5rem;
+      color: #fff;
+      text-align: center;
+      line-height: 6rem;
+      margin: 1rem auto;
+    }
+
+
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    button {
+      background: yellow;
+      color: black;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 5rem;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: white;
+      color: black;
+    }
+
+    .c1 {
+      color: black;
+      background: white;
+      font-weight: bold;
+
+    }
+
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 16rem;
+      margin: 10px 0;
+    }
+
+    .label-left {
+      font-weight: bold;
+      width: 40%;
+      /* Adjust label width */
+      text-align: left;
+      color: white;
+    }
+
+    .input-right {
+      width: 65%;
+      /* Adjust input width */
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background: #f1f1f1;
+    }
+  </style>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu1aXuJGGob1WNf9ONGHXtyPDB-ABo5lI",
+      authDomain: "contactform-b6bd2.firebaseapp.com",
+      databaseURL: "https://contactform-b6bd2-default-rtdb.firebaseio.com",
+      projectId: "contactform-b6bd2",
+      storageBucket: "contactform-b6bd2.appspot.com",
+      messagingSenderId: "289204893801",
+      appId: "1:289204893801:web:88c4e9a0d15239ff348af8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const email = localStorage.getItem("userEmail");
+    if (email) {
+      const sanitizedEmail = email.replace(/\./g, '_');
+
+      async function fetchUserData() {
+        const userRef = ref(db, 'users/' + sanitizedEmail);
+        const snapshot = await get(userRef);
+
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          document.getElementById("userName").value = userData.fullName;
+          document.getElementById("userEmail").value = email;
+          document.getElementById("fullName").textContent = userData.fullName;
+          generateInitials();
+        } else {
+          alert("User data not found.");
+        }
+      }
+
+      function generateInitials() {
+        const fullName = document.getElementById("fullName").textContent;
+        const initials = fullName.split(" ").map(name => name[0]).join('').toUpperCase();
+        document.getElementById("profileImage").innerHTML = initials;
+      }
+
+      window.onload = fetchUserData;
+    } else {
+      alert("No user logged in!");
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="profile-section">
+      <h2>Profile</h2>
+      <div id="profileImage"></div>
+      <span id="fullName"></span>
+    </div>
+    <div class="form-group">
+      <label for="userName" class="label-left">Name:</label>
+      <input type="text" id="userName" name="userName" class="input-right c1" disabled />
+    </div>
+    <div class="form-group">
+      <label for="userEmail" class="label-left">Email:</label>
+      <input type="email" id="userEmail" name="userEmail" class="input-right c1" disabled />
+    </div>
+
+    <div class="btn-container">
+      <button id="backBtn">Back</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+      window.location.href = "index.html";
+    });
+
+    document.getElementById("backBtn").addEventListener("click", function () {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+
+</html>

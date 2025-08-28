@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Ridex (Cab Booking System)</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="py-3 bg-dark text-white text-center">
+        <h1>Help & Support</h1>
+
+        <!-- Go to Home Page Button -->
+        <button class="btn btn-secondary position-absolute" id="home-button" style="right: 20px; top: 20px;">
+            Home
+        </button>
+    </header>
+
+    <!-- FAQs Section -->
+    <section class="faqs py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <!-- Question 1 -->
+                <div class="card">
+                    <div class="card-header" id="faq1">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                data-target="#faqCollapse1">
+                                How do I book a cab?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="faqCollapse1" class="collapse" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            You can book a cab through our website or mobile app. Just enter your pickup and drop-off
+                            locations, choose your ride, and confirm the booking.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="card">
+                    <div class="card-header" id="faq2">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#faqCollapse2">
+                                What payment methods do you accept?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="faqCollapse2" class="collapse" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            We accept credit/debit cards, digital wallets, and cash payments.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="card">
+                    <div class="card-header" id="faq3">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#faqCollapse3">
+                                Can I cancel my booking?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="faqCollapse3" class="collapse" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            Yes, you can cancel your booking from your account dashboard or through our customer support
+                            team. Cancellation charges may apply based on the timing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="contact-info py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Contact Information</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Customer Support</h5>
+                    <p>Email: Ridex@Book.com</p>
+                    <p>Phone: +91 8320487444</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Address</h5>
+                    <p>123 Main Street, Ahmedabad,Gujarat</p>
+                    <p>Hours: Mon-Sat 9:00 AM - 7:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Form Section -->
+    <section class="support-form py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Submit a Support Request</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea class="form-control" id="message" rows="5"
+                        placeholder="Describe your issue or question"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-3 bg-dark text-white">
+        <div class="container d-flex justify-content-center align-items-center">
+            <p class="mb-0 text-center">&copy; 2025 Ridex. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript to handle button click -->
+    <script>
+        // Redirect to the home page when the "Go to Home Page" button is clicked
+        document.getElementById("home-button").addEventListener("click", function () {
+            window.location.href = "index.html"; // Replace with the actual home page URL
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

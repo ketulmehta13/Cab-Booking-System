@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Ride</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-image: url(img/bg.jpg);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ride-booking {
+            background: #444;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .ride-booking h3 {
+            text-align: center;
+            color: yellow;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background: #555;
+            border: none;
+            color: white;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ride-booking">
+        <span class="close" id="closeModal">&times;</span>
+        <h3>Book Your Ride</h3>
+        <form id="rideForm">
+            <div class="form-group">
+                <label for="origin">Origin:</label>
+                <input type="text" id="origin" class="form-control" placeholder="Enter your starting location" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" class="form-control" placeholder="Enter your destination" required>
+            </div>
+            <div class="form-group">
+                <label for="pickup-time">Pickup Time:</label>
+                <input type="time" id="pickup-time" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Choose Payment Method:</label>
+                <select id="paymentMethod" class="form-control" required>
+                    <option value="" disabled selected>Select Payment Method</option>
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="upi">UPI</option>
+                    <option value="netbanking">Net Banking</option>
+                </select>
+            </div>
+            <div id="paymentDetails"></div>
+
+            <button type="submit" class="btn btn-yellow btn-block mt-3">Proceed to Pay</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        // Import Firebase SDK modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCvEXX1PcoeNdvbu3JEfPlRMuHM63suSs",
+            authDomain: "booking-cab-da819.firebaseapp.com",
+            databaseURL: "https://booking-cab-da819-default-rtdb.firebaseio.com",
+            projectId: "booking-cab-da819",
+            storageBucket: "booking-cab-da819.firebasestorage.app",
+            messagingSenderId: "1043963948907",
+            appId: "1:1043963948907:web:73a52fdfc376bce43ba62e",
+            measurementId: "G-FL33X739F1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        document.getElementById("rideForm").addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById("rideForm");
+            if (form.checkValidity()) {
+                // Disable button to prevent multiple clicks
+                const submitButton = document.querySelector("button[type='submit']");
+                submitButton.disabled = true;
+
+                // Get form data
+                const origin = document.getElementById("origin").value;
+                const destination = document.getElementById("destination").value;
+                const pickupTime = document.getElementById("pickup-time").value;
+                const paymentMethod = document.getElementById("paymentMethod").value;
+
+                // Generate unique ride ID
+                const rideId = Date.now();
+                const rideRef = ref(database, 'Rides/' + rideId);
+
+                try {
+                    await set(rideRef, {
+                        origin: origin,
+                        destination: destination,
+                        pickupTime: pickupTime,
+                        paymentMethod: paymentMethod
+                    });
+
+                    console.log("Ride booked successfully!");
+
+                    // Show alert and redirect after confirmation
+                    alert("Payment Successful! Your ride has been booked.");
+                    window.location.href = "index.html"; // Redirect to home page
+                } catch (error) {
+                    console.error("Error booking ride: ", error);
+                }
+
+                // Re-enable the button
+                submitButton.disabled = false;
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        $(document).ready(function () {
+            $("#paymentMethod").change(function () {
+                var method = $(this).val();
+                var paymentDetails = $("#paymentDetails");
+
+                if (method === "card") {
+                    paymentDetails.html(`
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="Enter Card Number" required>
+                    </div>
+                `);
+                } else if (method === "upi") {
+                    paymentDetails.html(`
+                    <div class="form-group">
+                        <label for="upiId">UPI ID:</label>
+                        <input type="text" id="upiId" class="form-control" placeholder="Enter UPI ID" required>
+                    </div>
+                `);
+                } else if (method === "netbanking") {
+                    paymentDetails.html(`
+                    <div class="form-group">
+                        <label for="bank">Select Your Bank:</label>
+                        <select id="bank" class="form-control" required>
+                            <option value="" disabled selected>Select Bank</option>
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option value="sbi">State Bank of India</option>
+                        </select>
+                    </div>
+                `);
+                } else {
+                    paymentDetails.html("");
+                }
+            });
+        });
+
+        // Close Modal Functionality
+        document.getElementById("closeModal").addEventListener("click", function () {
+            window.location.href = "index.html"; // Redirect to home page
+        });
+    </script>
+
+</body>
+
+</html>

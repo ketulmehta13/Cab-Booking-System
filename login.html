@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-image: url(img/bg.jpg);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: #444;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+
+        .login-container h2 {
+            color: yellow;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            text-align: left;
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background: #555;
+            border: none;
+            color: white;
+        }
+
+        .btn-yellow {
+            background-color: yellow;
+            border: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .btn-google {
+            background-color: yellow;
+            border: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-home {
+            background-color: yellow;
+            border: none;
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 6px 12px;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 5px;
+            width: auto;
+        }
+
+        .btn-home:hover {
+            background-color: yellow;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid yellow;
+            margin: 5px;
+        }
+
+        .separator span {
+            padding: 0 10px;
+            font-weight: bold;
+            color: yellow;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-yellow btn-block">Login</button>
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="signup.html" style="color: yellow;">Don't have an account? Sign Up</a>
+        </p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBu1aXuJGGob1WNf9ONGHXtyPDB-ABo5lI",
+            authDomain: "contactform-b6bd2.firebaseapp.com",
+            databaseURL: "https://contactform-b6bd2-default-rtdb.firebaseio.com",
+            projectId: "contactform-b6bd2",
+            storageBucket: "contactform-b6bd2.appspot.com",
+            messagingSenderId: "289204893801",
+            appId: "1:289204893801:web:88c4e9a0d15239ff348af8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        const db = getDatabase(app);
+
+        // Email/Password Login
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const sanitizedEmail = email.replace(/\./g, '_');
+
+            try {
+                const userRef = ref(db, 'users/' + sanitizedEmail);
+                const snapshot = await get(userRef);
+
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+
+                    if (userData.password === password) {
+                        localStorage.setItem("loggedIn", "true");
+                        localStorage.setItem("userName", userData.fullName);
+                        localStorage.setItem("userEmail", email);
+                        alert("Login successful!");
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Incorrect password. Please try again.");
+                    }
+                } else {
+                    if (confirm("No account found. Would you like to sign up?")) {
+                        window.location.href = "signup.html";
+                    }
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                alert("An error occurred during login. Please try again.");
+            }
+        });
+    </script>
+
+    
+    <script>
+         // Close Modal Functionality
+         document.getElementById("closeModal").addEventListener("click", function () {
+            window.location.href = "index.html"; // Redirect to home page
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

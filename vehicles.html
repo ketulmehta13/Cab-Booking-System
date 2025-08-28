@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vehicles - Ridex (Cab Booking System)</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+    <style>
+        /* Social Media Icons */
+        .social-wrapper {
+            display: inline-flex;
+            margin-top: 15px;
+        }
+
+        .social-wrapper .icon {
+            margin: 0 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-wrapper .icon span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            width: 35px;
+            background: #fff;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-wrapper .icon span i {
+            font-size: 15px;
+        }
+
+        .social-wrapper .icon .tooltip {
+            position: absolute;
+            top: 0;
+            background: #fff;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 15px;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-wrapper .icon:hover .tooltip {
+            top: -40px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .icon .tooltip:before {
+            position: absolute;
+            content: "";
+            height: 10px;
+            width: 10px;
+            background: #fff;
+            left: 50%;
+            bottom: -4px;
+            transform: translateX(-50%) rotate(45deg);
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-wrapper .icon:hover span {
+            color: #fff;
+        }
+
+        .social-wrapper .facebook:hover span,
+        .social-wrapper .facebook:hover .tooltip,
+        .social-wrapper .facebook:hover .tooltip:before {
+            background: #3B5999;
+        }
+
+        .social-wrapper .twitter:hover span,
+        .social-wrapper .twitter:hover .tooltip,
+        .social-wrapper .twitter:hover .tooltip:before {
+            background: #46C1F6;
+        }
+
+        .social-wrapper .instagram:hover span,
+        .social-wrapper .instagram:hover .tooltip,
+        .social-wrapper .instagram:hover .tooltip:before {
+            background: #e1306c;
+        }
+
+        .social-wrapper .github:hover span,
+        .social-wrapper .github:hover .tooltip,
+        .social-wrapper .github:hover .tooltip:before {
+            background: #333;
+        }
+
+        .social-wrapper .youtube:hover span,
+        .social-wrapper .youtube:hover .tooltip,
+        .social-wrapper .youtube:hover .tooltip:before {
+            background: #DE463B;
+        }
+
+        .l1 {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            /* Adjust text size if needed */
+            color: #fff;
+        }
+
+        .l1-img {
+            width: 40px;
+            /* Adjust size as needed */
+            height: auto;
+            margin-right: 10px;
+            /* Space between logo and text */
+        }
+
+
+        /* Ensure full height layout */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background-color:black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: 60px;
+            /* Fixed height for header */
+        }
+
+        /* Add padding so content is not hidden under header */
+        .content {
+            flex: 1;
+            padding-top: 100px;
+            /* Adjusted based on header height */
+        }
+
+        /* Logo Styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Logo Image */
+        .logo-img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        /* Home Button - Aligns to Top Right */
+        .header .btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer Styling */
+        .footer {
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">
+            <img src="img/logo_favicon.png" alt="Ridex Logo" class="logo-img"> Ridex
+        </h1>
+        <button class="btn btn-secondary" id="home-button">Home</button>
+    </header>
+
+    <!-- Vehicles Section -->
+    <section class="vehicles py-5">
+        <div class="container">
+            <div class="text-center mb-5"><br>
+                <h2>Our Available Vehicles</h2>
+                <p>Choose from a wide range of vehicles that suit your travel needs.</p>
+            </div>
+
+            <div class="row" id="vehicles-container">
+                <!-- Vehicle 1 -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/luxury sedan.webp" class="card-img-top" alt="Luxury Sedan">
+                        <div class="card-body">
+                            <h5 class="card-title">Luxury Sedan</h5>
+                            <p class="card-text">A comfortable and stylish sedan perfect for business trips or long
+                                journeys.</p>
+                            <p><strong>Price: ₹10/km</strong></p>
+
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle 2 -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600" data-aos-delay="200">
+                    <div class="vehicle-card card">
+                        <img src="img/economy car.webp" class="card-img-top" alt="Economy Car">
+                        <div class="card-body">
+                            <h5 class="card-title">Economy Car</h5>
+                            <p class="card-text">Affordable and fuel-efficient, ideal for short trips around the city.
+                            </p>
+                            <p><strong>Price: ₹7/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle 3 -->
+                <div class="col-md-4 mb-4" data-aos-delay="300" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/suv car.webp" class="card-img-top" alt="SUV">
+                        <div class="card-body">
+                            <h5 class="card-title">SUV</h5>
+                            <p class="card-text">A spacious and powerful SUV, perfect for families or off-road
+                                adventures.</p>
+                            <p><strong>Price: ₹15/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle 4 -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/Mini-Van 2.webp" class="card-img-top" alt="Vehicle 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Minivan</h5>
+                            <p class="card-text">Ideal for group travel, offering plenty of space and comfort.</p>
+                            <p><strong>Price: ₹12/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle 5 -->
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-duration="600" data-aos-delay="200">
+                    <div class="vehicle-card card">
+                        <img src="img/convertible car.jpeg" class="card-img-top" alt="Vehicle 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Convertible</h5>
+                            <p class="card-text">Experience luxury with a convertible car, scenic drives.
+                            </p>
+                            <p><strong>Price: ₹17/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle 6 -->
+                <div class="col-md-4 mb-4" data-aos-delay="300" data-aos="flip-right" data-aos-duration="600">
+                    <div class="vehicle-card card">
+                        <img src="img/luxury van.jpeg" class="card-img-top" alt="Vehicle 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Luxury Van</h5>
+                            <p class="card-text">A high-end van with all the luxury features, perfect for corporate
+                                travel.</p>
+                            <p><strong>Price: ₹20/km</strong></p>
+                            <a href="ride.html" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER  -->
+
+    <!-- contact -->
+    <section class="contact" id="contact">
+        <div class="contact-box">
+            <h1 class="l1">
+                <img src="img/logo_favicon.png" alt="Ridex Logo" class="l1-img"> Ridex
+            </h1>
+
+            <a href="#" class="qr"><br>
+                <img src="img/qrcode.png">
+            </a>
+        </div>
+
+        <div class="contact-box">
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="vehicles.html">Our Vehicles</a>
+            <!-- <a href="Premium services.html">Premium Services</a> -->
+            <a href="help-support.html">Help & support</a>
+        </div>
+
+
+        <div class="contact-box">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:Ridex@Book.com">Ridex@Book.com</a></p>
+            <p>Phone: <a href="#">+91 8320487444</a></p>
+        </div>
+
+        <div class="contact-box">
+            <h3>Follow Us</h3>
+            <div class="social-wrapper">
+                <div class="icon facebook">
+                    <div class="tooltip">Facebook</div>
+                    <span><i class="fab fa-facebook-f"></i></span>
+                </div>
+                <div class="icon twitter">
+                    <div class="tooltip">Twitter</div>
+                    <span><i class="fab fa-twitter"></i></span>
+                </div>
+                <div class="icon instagram">
+                    <div class="tooltip">Instagram</div>
+                    <span><i class="fab fa-instagram"></i></span>
+                </div>
+                <div class="icon github">
+                    <div class="tooltip">Github</div>
+                    <span><i class="fab fa-github"></i></span>
+                </div>
+                <div class="icon youtube">
+                    <div class="tooltip">YouTube</div>
+                    <span><i class="fab fa-youtube"></i></span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="copyright">
+        <div class="end-text1">
+            <p>© 2025 Ridex . All Rights Reserved</p>
+        </div>
+
+        <div class="end-text2">
+            <a href="#">Privacy Policy | Terms & Conditions</a>
+        </div>
+
+    </div>
+
+
+    <script>
+        // Redirect to the home page when the "Go to Home Page" button is clicked
+        document.getElementById("home-button").addEventListener("click", function () {
+            window.location.href = "index.html"; // Replace "index.html" with the actual home page URL
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pzjw8f+ua7Kw1TIqVJw2UJRRU7A6t3ePFF4zBzF3MSTwn2Ml6G1F59PAK+0XlF8V"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

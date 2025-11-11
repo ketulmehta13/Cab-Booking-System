@@ -47,15 +47,15 @@ A modern, responsive cab booking website offering premium transportation service
 
 ### Quick Start
 
-1. **Clone the repository** git clone https://github.com/ketulmehta13/Cab-Booking-System.git
+1. **Clone the repository**  : git clone https://github.com/ketulmehta13/Cab-Booking-System.git
 
-2. **Navigate to project directory** cd Cab-Booking-System
+2. **Navigate to project directory**  :  cd Cab-Booking-System
 
 
-3. **Open in browser**  Simply double-click index.html or use:
-start index.html # Windows
-open index.html # macOS
-xdg-open index.html # Linux
+3. **Open in browser** - Simply double-click index.html or use:
+   start index.html # Windows
+   open index.html # macOS
+   xdg-open index.html # Linux
 
 
 ***

@@ -2,7 +2,6 @@
 
 A modern, responsive cab booking website offering premium transportation services including executive travel, luxury events, airport transfers, and VIP drops. Built with pure HTML, CSS, and JavaScript with smooth animations and an elegant user interface.[file:12]
 
-![Ridex Banner](img/bg.jpg)
 
 ## 🌟 Features
 
